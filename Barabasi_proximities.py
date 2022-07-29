@@ -7,7 +7,7 @@ import numpy as np
 import pandas as pd
 import networkx as nx
 
-# Barabasi metric: closest
+# Barabasi proximity: closest
 def proximity_closest(network, geneSet1, geneSet2): 
     # Check if the genes in geneSet1 and geneSet2 are present in the network
     geneSet1 = geneSet1 & network.nodes
@@ -32,7 +32,7 @@ def proximity_closest(network, geneSet1, geneSet2):
     return closest_dist
 
 
-# Barabasi metric: shortest
+# Barabasi proximity: shortest
 def proximity_shortest(network, geneSet1, geneSet2):
     # Check if the genes in geneSet1 and geneSet2 are present in the network
     geneSet1 = geneSet1 & network.nodes
@@ -81,7 +81,7 @@ def get_topological_centre(network, geneSet):
     topological_centre = set(geneSet_sum_dist.loc[geneSet_sum_dist["sum_dist"] == min_value, "Gene"])
     return topological_centre
 
-# Barabasi metric: centre
+# Barabasi proximity: centre
 def proximity_centre(network, topological_centre, geneSet2):
     
     # Check if the genes in topological_centre and geneSet2 are present in the network
@@ -104,3 +104,35 @@ def proximity_centre(network, topological_centre, geneSet2):
     
     dist_to_centre = geneSet1_avg_dist["avg_dist"].mean()
     return dist_to_centre
+
+
+# Barabasi proximity: kernel
+def proximity_kernel(network, geneSet1, geneSet2):
+    # Check if the genes in geneSet1 and geneSet2 are present in the network
+    geneSet1 = geneSet1 & network.nodes
+    geneSet2 = geneSet2 & network.nodes
+
+    # Calculate all distances between geneset1 and geneset2
+    distance_matrix = pd.DataFrame(data = np.nan, index = geneSet1, columns  = geneSet2)
+    for gene1 in geneSet1:
+        for gene2 in geneSet2:
+            if gene1 != gene2:
+                distance_matrix.loc[gene1, gene2] = nx.shortest_path_length(network, gene1, gene2)
+
+    import math
+    def transform_df(x):
+        return (math.e**(-(x+1)))/len(geneSet1)
+
+    # Apply kernel transformation
+    transformed_matrix = distance_matrix.apply(np.vectorize(transform_df))
+
+    # 
+    geneSet1_transformed_dist = pd.DataFrame()
+    for gene in geneSet1:
+        transformed_dist = math.log(transformed_matrix.loc[gene,:].dropna().sum())
+        tmp = pd.DataFrame({"Gene" : gene, "transformed_dist" : transformed_dist}, index = [0])
+        geneSet1_transformed_dist = pd.concat([geneSet1_transformed_dist, tmp]).reset_index(drop = True)
+
+    # Calculate the average of the transformed values
+    kernel_dist = -geneSet1_transformed_dist["transformed_dist"].mean()
+    return kernel_dist
