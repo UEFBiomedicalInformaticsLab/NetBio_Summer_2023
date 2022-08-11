@@ -16,3 +16,8 @@ The tutorial runs on Jupyter notebook.
 <b>Intalling jupyter notebook with anaconda</b>
     
     conda install -c anaconda jupyter
+
+
+<b>Install required python modules using anaconda</b>
+
+    conda install -c anaconda -c conda-forge numpy pandas networkx powerlaw matplotlib seaborn tqdm
