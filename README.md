@@ -1,4 +1,4 @@
-<!--- NetBio_Summer_2022 --->
+<!--- NetBio_Summer_2023 --->
 
 # 20220601 – Quantitative Biology Summer School
 ## Network-based approaches in biomedicine 
@@ -7,7 +7,7 @@ The tutorial runs on Jupyter notebook.
 
 <b>Downloading the tutorial materials</b>
     
-    git clone https://github.com/UEFBiomedicalInformaticsLab/NetBio_Summer_2022.git
+    git clone https://github.com/UEFBiomedicalInformaticsLab/NetBio_Summer_2023.git
 
 <b>Intalling jupyter notebook with pip</b>
     
