@@ -1,6 +1,8 @@
 library(igraph)
 library(tidyr)
 
+
+# Prepare the network for exercise
 # Read network
 Barabasi_Net <- read.csv("Data/Barabasi_CoV2_PPI.csv")
 Barabasi_Net <- Barabasi_Net <- graph_from_data_frame(Barabasi_Net, directed = FALSE)
@@ -18,7 +20,7 @@ Barabasi_SarsCov_Net <- set_vertex_attr(Barabasi_SarsCov_Net,
                                         name = "clustering_coefficient", 
                                         value = transitivity(Barabasi_SarsCov_Net, type = "local", isolates = "zero"))
 
-Barabasi_SarsCov_Net <- induced_subgraph(Barabasi_SarsCov_Net, V(Barabasi_SarsCov_Net)[V(Barabasi_SarsCov_Net)$clustering_coefficient > 0.5])
+Barabasi_SarsCov_Net <- induced_subgraph(Barabasi_SarsCov_Net, V(Barabasi_SarsCov_Net)[V(Barabasi_SarsCov_Net)$clustering_coefficient > 0.3])
 selected_SarsCov_genes <- V(Barabasi_SarsCov_Net)$name
 
 
@@ -40,4 +42,4 @@ dis_genes_select <- unique(disease_gene_links$genes[disease_gene_links$disease %
 Exercise_Net <- induced_subgraph(Barabasi_Net, 
                                  V(Barabasi_Net)[V(Barabasi_Net)$name %in% c(selected_SarsCov_genes, dis_genes_select)])
 Exercise_Net <- as_data_frame(Exercise_Net, what = "edges")
-write.csv(Exercise_Net, "Exercise_PPI_Net.csv", row.names = FALSE)
+write.csv(Exercise_Net, "Data/Exercise_PPI_Net.csv", row.names = FALSE)

@@ -1,6 +1,6 @@
 <!--- NetBio_Summer_2023 --->
 
-# 20220601 – Quantitative Biology Summer School
+# Quantitative Biomedicine Summer School
 ## Network-based approaches in biomedicine 
 
 The tutorial runs on Jupyter notebook.

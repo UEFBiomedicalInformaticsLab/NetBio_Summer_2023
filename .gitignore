@@ -1,2 +1,6 @@
 .R
+.Rhistory
 Data_prep/
+.ipynb_checkpoints/
+**/*.ipynb_checkpoints/
+__pycache__/
