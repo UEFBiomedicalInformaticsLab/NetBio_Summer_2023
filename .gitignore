@@ -1,7 +1,9 @@
 .R
 .Rhistory
 Data_prep/
+Extras/
 .ipynb_checkpoints/
 **/*.ipynb_checkpoints/
 __pycache__/
+derby.log
 
