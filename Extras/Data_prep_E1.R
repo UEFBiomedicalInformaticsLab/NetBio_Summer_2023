@@ -1,6 +1,11 @@
-# Data preparation (Exercise 1, part B)
+set.seed(5081)
 
 
+
+# Data preparation (Exercise 1)
+
+
+# Load libraries
 library(tidyverse)
 library(igraph)
 
@@ -112,3 +117,6 @@ write.csv(final_df, "Data/Drugs.csv", row.names = FALSE)
 
 # "Antiviral Agents", "Antiprotozoals", "Antiparasitic Agents", "Antivirals for Systemic Use",
 #"Experimental Unapproved Treatments for COVID-19", "Approved Treatments for COVID-19"
+
+
+print(warnings())
