@@ -21,3 +21,7 @@ The tutorial runs on Jupyter notebook.
 <b>Install required python modules using anaconda</b>
 
     conda install -c anaconda -c conda-forge numpy pandas networkx powerlaw matplotlib seaborn tqdm
+    
+    
+    
+Launch using Binder [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/UEFBiomedicalInformaticsLab/NetBio_Summer_2023.git/HEAD) 
